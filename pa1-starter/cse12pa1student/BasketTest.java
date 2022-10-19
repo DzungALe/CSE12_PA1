@@ -116,9 +116,10 @@ public class BasketTest {
 		Basket basketToTest = makeBasket();
 		basketToTest.removeFromBasket(item1);
 		
-		assertEquals()
+		assertEquals(0, basketToTest.count()); 			//Either way, should still be only 0 items
 	}
-	//Check for proper removal
+	
+	//Proper removal tests
 	@Test
 	public void removedCount1()
 	{
@@ -130,24 +131,24 @@ public class BasketTest {
 		basketToTest.addToBasket(item1);
 		basketToTest.removeFromBasket(item1);
 
-		assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item2
+		assertEquals(0, basketToTest.count());	
 	}
 	
 	//Check for removal of more than 1
-		public void removedCount2()
-		{
-			Basket basketToTest = makeBasket();
+	public void removedCount2()
+	{
+		Basket basketToTest = makeBasket();
 
-			Item item1 = new Item("Shampoo", 5);
-			Item item2 = new Item("Body wash", 10);
+		Item item1 = new Item("Shampoo", 5);
+		Item item2 = new Item("Body wash", 10);
 
-			//Add and remove 2 items
-			basketToTest.addToBasket(item1);
-			basketToTest.addToBasket(item2);
-			basketToTest.removeFromBasket(item1);
-			basketToTest.removeFromBasket(item2);
+		//Add and remove 2 items
+		basketToTest.addToBasket(item1);
+		basketToTest.addToBasket(item2);
+		basketToTest.removeFromBasket(item1);
+		basketToTest.removeFromBasket(item2);
 
-			assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item2
-		}
+		assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item2
+	}
 	
 }
