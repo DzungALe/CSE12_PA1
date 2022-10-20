@@ -45,6 +45,16 @@ public class BasketTest {
 		return null;
 	}
 	
+	//Add null
+	@Test 
+	public void addedNull()
+	{
+		Basket basketToTest = makeBasket();
+		Item item1 = null;
+		basketToTest.addToBasket(item1);
+		assewrEquals(false, basketToTest.removeAllFromBasket(i));
+	}
+	
 	//Check for empty basket
 	@Test
 	public void addedNothing()
@@ -52,6 +62,7 @@ public class BasketTest {
 		Basket basketToTest = makeBasket();
 		
 		assertEquals(0, basketToTest.count());
+		assertEquals(0, basketToTest.totalCost());
 	}
 	
 	//Sample test
@@ -107,7 +118,7 @@ public class BasketTest {
 		assertEquals(2, basketToTest.countItem(item2)); //CHeck 2 of item 2, as item2 = item1
 	}
 	
-	//Remove nothing...?
+	//Remove nothing
 	@Test
 	public void removedNothing()
 	{
@@ -117,8 +128,9 @@ public class BasketTest {
 		basketToTest.removeFromBasket(item1);
 		
 		assertEquals(0, basketToTest.count()); 			//Either way, should still be only 0 items
+		assertEquals(0, basketToTest.totalCost());		//Cost should be 0 as well
 	}
-	
+
 	//Proper removal tests
 	@Test
 	public void removedCount1()
@@ -131,10 +143,13 @@ public class BasketTest {
 		basketToTest.addToBasket(item1);
 		basketToTest.removeFromBasket(item1);
 
+		//Cost and price should be 0
 		assertEquals(0, basketToTest.count());	
+		assertEquals(0, basketToTest.totalCost());
 	}
 	
 	//Check for removal of more than 1
+	@Test
 	public void removedCount2()
 	{
 		Basket basketToTest = makeBasket();
@@ -147,10 +162,65 @@ public class BasketTest {
 		basketToTest.addToBasket(item2);
 		basketToTest.removeFromBasket(item1);
 		basketToTest.removeFromBasket(item2);
+	
 
 		assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item2
 	}
 	
-	public void 
-	
+	//Test for removing all items from the test
+	@Test
+	public void removedAllFromBasketTest()
+	{
+		Basket basketToTest = makeBasket();
+
+		Item item1 = new Item("Shampoo", 5);
+		Item item2 = new Item("Body wash", 10);
+
+		//Add items and remove 3 items
+		basketToTest.addToBasket(item1);
+		basketToTest.addToBasket(item1);
+		basketToTest.addToBasket(item2);
+
+		basketToTest.removeAllFromBasket(item1);
+
+		//Should still be one item for item 2
+		assertEquals(1, basketToTest.count());
+	}
+
+	//Test of removing items not in basket
+	@Test
+	public void removedNotInBasket()
+	{
+		Basket basketToTest = makeBasket();
+
+		Item item1 = new Item("Shampoo", 5);
+		Item item2 = new Item("Body wash", 10);
+
+		//Add items and remove 2 items
+		basketToTest.addToBasket(item1);
+		basketToTest.addToBasket(item1);
+
+		assertEquals(false, basketToTest.removeFromBasket(item2));
+		assertEquals(true, basketToTest.removeFromBasket(item1));
+
+		//Remove all from basket, basket should be empty
+		basketToTest.removeAllFromBasket(item1);
+
+		assertEquals(false, basketToTest.removeFromBasket(item1));
+	}
+
+	//Test cost
+	@Test
+	public void costCheck1()
+	{
+		Item item1 = new Item("Shampoo", 5);
+		Item item2 = new Item("Body wash", 10);
+		Item item3 = new Item("Towel", 50);
+
+		basketToTest.addToBasket(item1);
+		basketToTest.addToBasket(item2);
+		basketToTest.addToBasket(item3);
+
+		assertEquals(65, basketToTest.totalCost());
+	}
 }
