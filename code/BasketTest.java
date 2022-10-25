@@ -52,7 +52,7 @@ public class BasketTest {
 		Basket basketToTest = makeBasket();
 		Item item1 = null;
 		basketToTest.addToBasket(item1);
-		assewrEquals(false, basketToTest.removeAllFromBasket(i));
+		assewrEquals(false, basketToTest.removeAllFromBasket(item1));
 	}
 	
 	//Check for empty basket
@@ -106,7 +106,6 @@ public class BasketTest {
 
 		Item item1 = new Item("Shampoo", 5);
 		Item item2 = new Item("Body wash", 10);
-
 		Item item3 = new Item("Shampoo", 5);
 
 		//Add 3 items
@@ -114,8 +113,8 @@ public class BasketTest {
 		basketToTest.addToBasket(item2);
 		basketToTest.addToBasket(item3);
 
-		assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item2
-		assertEquals(2, basketToTest.countItem(item2)); //CHeck 2 of item 2, as item2 = item1
+		assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item3
+		assertEquals(1, basketToTest.countItem(item2)); //CHeck 2 of item 2, as item2 is unique
 	}
 	
 	//Remove nothing
@@ -132,6 +131,9 @@ public class BasketTest {
 	}
 
 	//Proper removal tests
+	/**
+	 * 
+	 */
 	@Test
 	public void removedCount1()
 	{
