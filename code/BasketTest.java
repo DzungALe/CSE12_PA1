@@ -186,16 +186,13 @@ public class BasketTest {
 		Item item1 = new Item("Shampoo", 5);
 		Item item2 = new Item("Body wash", 10);
 
-		//Add items and remove 3 items
 		basketToTest.addToBasket(item1);
 		basketToTest.addToBasket(item1);
-		basketToTest.addToBasket(item2);
 
 		assertEquals(true, basketToTest.removeAllFromBasket(item1));
-
-		basketToTest.removeAllFromBasket(item1);
 	}
 
+	@Test
 	public void removedAllFromBasketTest2()
 	{
 		Basket basketToTest = makeBasket();
@@ -207,11 +204,12 @@ public class BasketTest {
 		basketToTest.addToBasket(item1);
 		basketToTest.addToBasket(item1);
 		basketToTest.addToBasket(item2);
+		basketToTest.addToBasket(item2);
 
-		basketToTest.removeAllFromBasket(item1);
+		basketToTest.removeAllFromBasket(item2);
 
-		//Should still be 1 of item 2, since only item1 removed
-		assertEquals(1, basketToTest.count());
+		//Should still be 2 of item 2, since only item1 removed
+		assertEquals(2, basketToTest.count());
 	}
 
 	//Test of removing items not in basket
