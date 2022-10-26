@@ -213,6 +213,8 @@ public class BasketTest {
 	@Test
 	public void costCheck1()
 	{
+		Basket basketToTest = makeBasket();
+		
 		Item item1 = new Item("Shampoo", 5);
 		Item item2 = new Item("Body wash", 10);
 		Item item3 = new Item("Towel", 50);
