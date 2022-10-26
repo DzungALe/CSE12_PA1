@@ -52,7 +52,7 @@ public class BasketTest {
 		Basket basketToTest = makeBasket();
 		Item item1 = null;
 		basketToTest.addToBasket(item1);
-		assewrEquals(false, basketToTest.removeAllFromBasket(item1));
+		assertEquals(false, basketToTest.removeAllFromBasket(item1));
 	}
 	
 	//Check for empty basket
