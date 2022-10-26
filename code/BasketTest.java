@@ -52,7 +52,17 @@ public class BasketTest {
 		Basket basketToTest = makeBasket();
 		Item item1 = null;
 		basketToTest.addToBasket(item1);
-		assertEquals(false, basketToTest.removeAllFromBasket(item1));
+		assertEquals(false, basketToTest.removeFromBasket(item1));
+	}
+
+	public void countNull()
+	{
+		Basket basketToTest = makeBasket();
+
+		Item item1 = null;
+
+		basketToTest.addToBasket(item1);
+		assertEquals(0, basketToTest.count());
 	}
 	
 	//Check for empty basket
@@ -114,7 +124,7 @@ public class BasketTest {
 		basketToTest.addToBasket(item3);
 
 		assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item3
-		assertEquals(1, basketToTest.countItem(item2)); //CHeck 2 of item 2, as item2 is unique
+		assertEquals(1, basketToTest.countItem(item2)); //CHeck 1 of item 2, as item2 is unique
 	}
 	
 	//Remove nothing
@@ -156,20 +166,37 @@ public class BasketTest {
 		Basket basketToTest = makeBasket();
 
 		Item item1 = new Item("Shampoo", 5);
-		Item item2 = new Item("Body wash", 10);
+		Item item2 = new Item("Shampoo", 5);
 
 		//Add and remove 2 items
 		basketToTest.addToBasket(item1);
 		basketToTest.addToBasket(item2);
-		basketToTest.removeFromBasket(item1);
-		basketToTest.removeFromBasket(item2);
+		basketToTest.removeAllFromBasket(item1);
 
-		assertEquals(2, basketToTest.countItem(item1));	//Check 2 of item 1, as item1 = item2
+		assertEquals(0, basketToTest.countItem(item1));	//Check 0, as item1 = item2
+		assertEquals(0, basketToTest.count());
 	}
 	
 	//Test for removing all items from the test
 	@Test
-	public void removedAllFromBasketTest()
+	public void removedAllFromBasketTest1()
+	{
+		Basket basketToTest = makeBasket();
+
+		Item item1 = new Item("Shampoo", 5);
+		Item item2 = new Item("Body wash", 10);
+
+		//Add items and remove 3 items
+		basketToTest.addToBasket(item1);
+		basketToTest.addToBasket(item1);
+		basketToTest.addToBasket(item2);
+
+		assertEquals(true, basketToTest.removeAllFromBasket(item1));
+
+		basketToTest.removeAllFromBasket(item1);
+	}
+
+	public void removedAllFromBasketTest2()
 	{
 		Basket basketToTest = makeBasket();
 
@@ -183,7 +210,7 @@ public class BasketTest {
 
 		basketToTest.removeAllFromBasket(item1);
 
-		//Should still be one item for item 2
+		//Should still be 1 of item 2, since only item1 removed
 		assertEquals(1, basketToTest.count());
 	}
 
@@ -214,7 +241,7 @@ public class BasketTest {
 	public void costCheck1()
 	{
 		Basket basketToTest = makeBasket();
-		
+
 		Item item1 = new Item("Shampoo", 5);
 		Item item2 = new Item("Body wash", 10);
 		Item item3 = new Item("Towel", 50);
